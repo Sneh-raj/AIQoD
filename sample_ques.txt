@@ -1,0 +1,109 @@
+ 1. Find all products with a rating below 4.5 that have more than 200 reviews and are offered by the brand 'Nike' or 'Sony'?
+
+query :
+ {
+  "Rating": { "$lt": 4.5 },
+  "ReviewCount": { "$gt": 200 },
+  "Brand": { "$in": ["Nike", "Sony"] }
+}
+
+
+2. Which products in the Electronics category have a rating of 4.5 or higher and are in stock?
+
+query :
+{
+  "Category": "Electronics",
+  "Rating": { "$gte": 4.5 },
+  "Stock": { "$gt": 0 }
+}
+
+3. List products launched after January 1, 2022, in the Home & Kitchen or Sports categories with a discount of 10% or more, sorted by price in descending order?
+
+query:
+{
+  "LaunchDate": { "$gt": "01-01-2022" },
+  "Category": { "$in": ["Home & Kitchen", "Sports"] },
+  "Discount": { "$gte": "10%" }
+}
+
+
+4. Find all products with a price between $30 and $100 and a rating above 4?
+
+query :
+{
+  "Price": { "$gte": 30, "$lte": 100 },
+  "Rating": { "$gt": 4 }
+}
+
+
+5. Which products by the brand 'Apple' were launched before March 2022?
+
+
+query :
+{
+  "Brand": "Apple",
+  "LaunchDate": { "$lt": "01-03-2022" }
+}
+
+
+6. Find all products with a stock count of 100 or more and a rating above 4.2, sorted by review count in descending order?
+
+query:
+{
+  "Stock": { "$gte": 100 },
+  "Rating": { "$gt": 4.2 }
+}
+
+
+7. List products in the Electronics category with a discount of 15% or more and a rating of 4.5 or higher?
+
+query: 
+{
+  "Category": "Electronics",
+  "Discount": { "$gte": "15%" },
+  "Rating": { "$gte": 4.5 }
+}
+
+
+8. Find all products by the brand 'Dyson' or 'Ninja' with a rating above 4.1 and stock greater than 50?
+
+query:
+{
+  "Brand": { "$in": ["Dyson", "Ninja"] },
+  "Rating": { "$gt": 4.1 },
+  "Stock": { "$gt": 50 }
+}
+
+
+9. List all products in the Sports category with a discount of 5% or more and at least 300 reviews?
+
+query:
+{
+  "Category": "Sports",
+  "Discount": { "$gte": "5%" },
+  "ReviewCount": { "$gte": 300 }
+}
+
+
+10. Find products in the Home & Kitchen category with a price below $50 and a rating of 4.3 or higher?
+
+query:
+{
+  "Category": "Home & Kitchen",
+  "Price": { "$lt": 50 },
+  "Rating": { "$gte": 4.3 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

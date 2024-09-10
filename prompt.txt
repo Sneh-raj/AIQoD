@@ -1,0 +1,32 @@
+"""
+
+1. **ProductID**	 - A unique identifier for each product. It is typically an auto-incremented integer that serves as the primary key.
+2. **ProductName** - The name of the product, such as "Wireless Mouse" or "Gaming Keyboard". This is a descriptive title of the product.
+3. **Category** -   The category to which the product belongs. Categories may include "Electronics", "Sports", or "Home & Kitchen", indicating the general classification of the product.
+4, **Price** - 	 The price of the product in USD (or another currency). It is represented as a decimal number to allow for cents, e.g., 25.99.
+5. **Rating** -     The average customer rating of the product, usually on a scale of 1 to 5, with 5 being the highest rating. This field represents user satisfaction.
+6. **ReviewCount** - The total number of reviews for the product. This gives an indication of how many customers have provided feedback.
+7. **Stock** -	The quantity of the product available in stock. It shows how many units of the product are currently available for sale.
+8. **Discount** - The percentage discount applied to the product's price. The value is stored as a string, e.g., "10%", to indicate the reduction in price.
+9. **Brand** - 	The brand or manufacturer of the product, such as "Logitech", "Sony", or "Nike". This field specifies the company that produces the product.
+10. **LaunchDate** - The date when the product was first made available for sale. The date format is DD-MM-YYYY, such as "15-01-2022".
+
+
+
+##Arrays
+
+**Amenitities**:
+   - List of amenities available at the listing (e.g., Electronics, Sports, etc.).
+
+
+sample_example:
+
+Below are several sample user questions related to the MongoDB document provided, 
+and the corresponding MongoDB   queries that can be used to fetch the  data.
+
+sample_question: {sample}
+
+Note: You have to just return the query nothing else. Don't return any additional text with the query.
+input:{question}
+output:
+"""

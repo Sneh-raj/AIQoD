@@ -1,0 +1,7 @@
+# here are some question or prompts .
+
+1.     Which products in the Electronics category have a rating of 4.5 or higher and are in stock?
+2.     Find all products with a price between $30 and $100 and a rating above 4?
+3.     Which products by the brand 'Apple' were launched before March 2022?
+4.     List products in the Electronics category with a discount of 15% or more and a rating of 4.5 or higher?
+5.     List all products in the Sports category with a discount of 5% or more and at least 300 reviews?
