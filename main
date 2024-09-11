@@ -1,0 +1,110 @@
+
+import os  # Importing all the libraries
+import streamlit as st
+from pymongo import MongoClient
+import io, json
+from langchain_openai import ChatOpenAI
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+
+#  OpenAI API key 
+openai_api_key = "sk-wdO92bMkVEKRz3tg-UhKVtCyl1oq_e2zVKpL-QSXMRT3BlbkFJ7u5Yo0Y4ITdIFOcZecwGDVBVJy-0v6qWayZ9_Sj84A"
+
+# Initialize OpenAI model with GPT- 3.5 
+llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.0, openai_api_key=openai_api_key)
+
+#Connect to MongoDB client
+client = MongoClient('mongodb://localhost:27017/')
+db = client['AIQoD']
+collection = db['Sample_data']
+
+# user interface for the question or prompt to be asked
+st.title("Query for MongoDB")
+st.write("Ask your questions here")
+input = st.text_area("Please Enter your prompt")
+
+# Load sample questions for query generation
+with io.open("sample_ques.txt", "r", encoding="utf-8") as f1:
+    sample = f1.read()
+
+# Defining a template for the prompt
+prompt = """
+1. **ProductID**	 - A unique identifier for each product.
+2. **ProductName** - The name of the product.
+3. **Category** -   The category to which the product belongs.
+4. **Price** - 	 The price of the product in USD.
+5. **Rating** -     The average customer rating of the product.
+6. **ReviewCount** - The total number of reviews for the product.
+7. **Stock** -	The quantity of the product available in stock.
+8. **Discount** - The percentage discount applied to the product's price.
+9. **Brand** - 	The brand or manufacturer of the product.
+10. **LaunchDate** - The date when the product was first made available for sale.
+
+Sample query:
+
+sample_question: {sample}
+
+Note: You have to just return the query nothing else. Don't return any additional text with the query.
+input: {question}
+output:
+"""
+
+# Generating queries from prompt using LangChain's template
+query_with_prompt = PromptTemplate(
+    template=prompt,
+    input_variables=["question", "sample"]
+)
+
+llmchain = LLMChain(llm=llm, prompt=query_with_prompt, verbose=True)
+
+# If user input is provided, generate and run the query
+if input is not None:
+    button = st.button("Submit")
+    if button:
+        # Generate MongoDB query from input
+        response = llmchain.invoke({
+            "question": input,
+            "sample": sample
+        })
+        query = json.loads(response["text"])
+
+
+        # Execute the query against the MongoDB collection
+        results = collection.aggregate(query)
+        # Print and display results
+        st.write(f"Generated Query: {query}")
+        for result in results:
+            st.write(result)
+
+
+
+# Save results and query to a CSV file
+if results:
+# Convert MongoDB results to a DataFrame
+    df = pd.DataFrame(results)
+
+
+            
+# Save the DataFrame and query to CSV
+    df.to_csv("retrieved_data.csv", index=False)
+
+    
+
+# Save the generated query to CSV
+    with open("generated_query.csv", "w") as f:
+    f.write(f"Generated Query: {json.dumps(query)}")
+            
+    st.write("Query and data saved to CSV files.")
+else:
+    st.write("No results found.")
+
+
+
+
+
+
+
+
+
+
+
